@@ -1,10 +1,38 @@
 <!doctype html>
 <html>
+
 <head>
     <title></title>
+    <link rel="stylesheet" href="/stylesheet.css">
 </head>
+
 <body>
+
+
+    <div id="main">
+
+        <h1>{{heading}}</h1>
+        <h3>{{subHeading}}</h3>
+
+        <div v-if="images.length" class="grid">
+
+
+                <div v-for="image in images" class="image">
+
+                    <img :src="image.url" >
+                    {{image.title}}</img>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
     <script src="/js/vue.js"></script>
-    <script src="/js/axios.min.js"></script>
-</body>
-</html>
+        <script src="/js/axios.min.js"></script>
+        <script src="/script.js"></script>
+    </body>
+
+    </html>
