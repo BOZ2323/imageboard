@@ -32,3 +32,16 @@ exports.upload = function(url, username, title, description) {
     const params = [url, username, title, description];
     return db.query(q, params);
 };
+
+
+exports.zoom = function(id) {
+    const q = `
+    SELECT * WHERE id = $1;
+        `;
+    [id]
+
+    ;
+
+    const params = [id];
+    return db.query(q, params);
+};

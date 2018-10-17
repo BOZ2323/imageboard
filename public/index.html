@@ -13,6 +13,7 @@
         <h1>{{heading}}</h1>
         <h3>{{subHeading}}</h3>
 
+
         <input name="title" v-model="title" placeholder="Title">
         <input name="desc" v-model="desc" placeholder="Description">
         <input name="username" v-model="username" placeholder="Uploader Name">
@@ -21,8 +22,56 @@
 
         <input name="file" id="file" type="file" accept="image/*" @change="handleFileChange">
         <button @click="upload" class="button_home">Submit >></button>
+        <!-- <img @click="zoom" class="image">zoom</img> -->
         <div v-if="images.length" class="grid">
 
+        <div class="new_section">
+                <div v-for="image in images" class="none" v-if="images.length" :key="image.id">
+                    <div class="image">
+                        <img v-on:click="zoom(image.id)" class="mainimages" :src="image.url" :alt="image.title">
+                        <p v-on:click="zoom" >{{image.title}}
+                    </div>
+                </div>
+            </div>
+            <image-modal v-if="imageId" :id="imageId"> </image-modal>
+            <!-- <image-modal v-if="imageId" :id="imageId" @close="closeZoom"> </image-modal> -->
+        </div>
+    </div>
+
+
+            <script type="text/x-template" id="zoomtmp">
+                <div class="zoomtmp">
+                    <h1>one image</h1>
+
+                        <h1><em>{{id}}</em></h1>
+                    </div>
+        <!-- ///////////////////////////////////////// -->
+
+                        <!-- <div v-for="comment in comments" class="comment">
+
+                            <p>
+                                <img :src="image.url" class="image_title" >
+                                {{image.title}}</img>
+                            </p>
+
+                        </div>
+                    </div>
+
+                </div>
+                    <input v-model="heading2">
+                    </div> -->
+
+
+                </div>
+            </script>
+
+
+
+
+            <!-- But sometimes we may want to bind the value to a dynamic property on the Vue instance.
+            We can use v-bind to achieve that.
+            In addition, using v-bind allows us to bind the input value to non-string values. -->
+<!-- ///////////////////////////////////////// -->
 
                 <div v-for="image in images" class="image">
 

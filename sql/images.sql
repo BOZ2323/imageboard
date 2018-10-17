@@ -8,6 +8,22 @@ CREATE TABLE images(
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+-- /////////////////////// comments table //////////////
+
+CREATE TABLE comments(
+    id SERIAL PRIMARY KEY,
+    comment VARCHAR (500),
+    username VARCHAR (50),
+    image_id INT NOT NULL UNIQUE REFERENCES images(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ///////////////////////
+
+
+
+
+
 
 INSERT INTO images (url, username, title, description) VALUES (
     'https://s3.amazonaws.com/spicedling/MQwozP4QM5uK84XgPs4Q0oUIVWiwzN-w.jpg',
