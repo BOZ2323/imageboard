@@ -1,5 +1,7 @@
 * {
     font-family: "Arial";
+    background-color: #656368;
+    background-color: #f18936;
 }
 .grid {
     display: grid;
@@ -8,13 +10,69 @@
 
 .grid .image img {
     /* border: 1px solid black; */
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     padding: 20px;
+    object-position: center;
+    object-fit: cover;
+    font-size: 20px;
+    color: white;
+}
+.image p{
+    font-size: 20px;
+    color: white;
+    text-align: center;
+}
+
+h1{
+    font-size: 60px;
+    color: white;
+    text-align: center;
 }
 
 .grid .image {
     padding: 20px;
 
-    border: 1px solid black;
+    border: none;
+}
+.image_title{
+    font-size: 20px;
+    color: white;
+    text-align: center;
+}
+input{
+    margin-left: 30px;
+    margin-left: 41px;
+    background-color: white;
+    padding: 10px;
+    width: 210px;
+    height: 30px;
+    border: none;
+    font-size: 18px;
+}
+.button_home {
+    width: 160px;
+    height: 50px;
+    color: white;
+    font: 18px Arial;
+    /* background-color: red; */
+    /* box-shadow: 0px 2px 19px rgba(50, 50, 50, 0.75); */
+}
+.custom-file-upload {
+    width: 160px;
+    height: 30px;
+    color: white;
+    font: 18px Arial;
+    /* background-color: red; */
+    /* box-shadow: 0px 2px 19px rgba(50, 50, 50, 0.75); */
+}
+
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
 }

@@ -14,27 +14,21 @@ if (process.env.NODE_ENV === 'production') {
 const db = spicedPg(dbUrl);
 
 
-
-///////////////
-
-
-// let secrets;
-// if (process.env.NODE_ENV === "production") {
-//     secrets = process.env;
-// } else {
-//     secrets = require("./secrets");
-//
-// }
-// // const {spicedling, password}  = require('./secrets');
-// const dbUrl =
-//     process.env.DATABASE_URL ||
-//     `postgres:${spicedling}:${password}@localhost:5432/petition`;
-//
-// const db = spicedPg(dbUrl);
-
-
 exports.getImages = function() {
     return db.query(`SELECT * FROM images`).then(result => {
         return result.rows;
     });
+};
+
+
+
+////////////////
+exports.upload = function(url, username, title, description) {
+    const q = `
+    INSERT INTO images (url, username, title, description)
+    VALUES ($1, $2, $3, $4) returning *
+        `;
+
+    const params = [url, username, title, description];
+    return db.query(q, params);
 };

@@ -3,9 +3,14 @@
         el: "#main",
 
         data: {
-            heading: "Pix",
-            subHeading: "the pix",
-            images: []
+            heading: "pixu",
+            subHeading: "",
+            images: [],
+            title: '',
+            desc: '',
+            username:'',
+            first:'',
+            file: ''
         },
         mounted: function() {
             console.log("mounted");
@@ -21,46 +26,24 @@
                 .catch(function(err) {
                     console.log("ERROR IN AXIOS :", err.message);
                 });
+        },
+        methods: {
+            handleFileChange: function(e){
+                this.file = e.target.files[0];
+            },
+            upload: function(){ //to formData object append all the data you
+                var formData = new FormData;
+                formData.append('file', this.file);//name of field you are adding and the file
+                formData.append('desc', this.desc);
+                formData.append('title', this.title);
+                formData.append('username', this.username);
+                axios.post('/upload', formData );
+
+                var me = this;
+                axios.post('/upload', formData).then(function (response) {
+                    me.images.unshift(response.data[0]);
+                });
+            }
         }
     });
 })();
-
-// (function() {
-//     new Vue({
-//         el: "#main",
-//         data: {
-//             heading: "My Vue App",
-//             greetee: "World",
-//             cities: []
-//         },
-//         mounted: function() {
-//             var self = this;
-//             axios
-//                 .get("/cities")
-//                 .then(function(response) {
-//                     self.cities = response.data;
-//                 })
-//                 .catch(function(err) {});
-//         },
-//         methods: {
-//             handleClick: function(e) {
-//                 console.log("submits " + this.greetee);
-//             },
-//             handleMousedown: function(city) {
-//                 console.log(city.name, city.country);
-//             }
-//         }
-//     });
-// })();
-//
-//
-
-//app.$data ={heading:...}
-//app.heading='My Vue App'
-
-//data:{
-//images:[],
-//imageTopUpload:{}
-//}
-//input v-model="imageTouplaod.title" name:"title"
-//input v-model="imageTouplaod.desc" name:"desc"
