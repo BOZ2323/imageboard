@@ -47,15 +47,8 @@ app.post('/upload', uploader.single('file'), s3.upload, function(req, res) {
         });
 
 
-    // if (req.file) {
-    //     res.json({
-    //         success: true
-    //     });
-    // } else {
-    //     res.json({
-    //         success: false
-    //     });
-    // }
+
+
 });
 
 app.get("/image", (req, res) => {
