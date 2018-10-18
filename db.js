@@ -36,7 +36,7 @@ exports.upload = function(url, username, title, description) {
 
 exports.zoom = function(id) {
     const q = `
-    SELECT * WHERE id = $1;
+    SELECT * FROM images WHERE id = $1;
         `;
     [id]
 

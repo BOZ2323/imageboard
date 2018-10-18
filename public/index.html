@@ -29,7 +29,7 @@
                 <div v-for="image in images" class="none" v-if="images.length" :key="image.id">
                     <div class="image">
                         <img v-on:click="zoom(image.id)" class="mainimages" :src="image.url" :alt="image.title">
-                        <p v-on:click="zoom" >{{image.title}}
+                        <p v-on:click="zoom()" >{{image.title}}
                     </div>
                 </div>
             </div>
@@ -41,9 +41,22 @@
 
             <script type="text/x-template" id="zoomtmp">
                 <div class="zoomtmp">
-                    <h1>one image</h1>
+                    <h1>chosen image</h1>
 
                         <h1><em>{{id}}</em></h1>
+                        <div v-for="image in imageData" class="image">
+
+                            <p>
+                                <img :src="image.url" class="image_title" >
+                                {{image.title}}</img>
+                            </p>
+
+                        </div>
+
+
+
+
+
                     </div>
         <!-- ///////////////////////////////////////// -->
 
@@ -73,7 +86,7 @@
             In addition, using v-bind allows us to bind the input value to non-string values. -->
 <!-- ///////////////////////////////////////// -->
 
-                <div v-for="image in images" class="image">
+                <!-- <div v-for="image in imageData" class="image">
 
                     <p>
                         <img :src="image.url" class="image_title" >
@@ -83,11 +96,11 @@
                 </div>
             </div>
 
-        </div>
+        </div> -->
 
 
 
-    </div>
+
     <script src="/js/vue.js"></script>
         <script src="/js/axios.min.js"></script>
         <script src="/js/script.js"></script>

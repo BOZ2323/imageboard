@@ -5,21 +5,21 @@ Vue.component('image-modal', {
     template: '#zoomtmp',
     data: function(){ //provides data as a function, when you change sth here, it will change everywhere in the file
         return {
-            heading: 'zoom pix'
+            imageData: ''
         };
     },
-    props: ['id', 'name','country','comment'],
+    props: ['id'],
 
 
     mounted: function(){
         console.log('component has mounted');
         var self = this;
         axios
-            .get("/image")
+            .get("/zoom/" + this.id)
             .then(function(response) {
                 console.log("RESPONSE :", response);
                 console.log("1 :", response.data);
-                self.images = response.data;
+                self.imageData = response.data;
                 console.log("2 :", response.data);
             })
             .catch(function(err) {
@@ -33,7 +33,7 @@ Vue.component('image-modal', {
         },
         click: function(){
             this.heading  = this.id + '' + this.heading2;
-            this.$emit('change', 'I love change');//1st arg = name, 2.arg =
+            this.$emit('change', 'I love my couch');//1st arg = name, 2.arg =
             //>> add to methods: handleChange;
         },
         // zoom: function(id){ //to formData object append all the data you need

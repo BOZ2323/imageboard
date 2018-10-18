@@ -45,11 +45,28 @@ app.post('/upload', uploader.single('file'), s3.upload, function(req, res) {
             res.json(result.rows);
             console.log("this is the result: ",result);
         });
-
-
-
-
 });
+////////////////////////////
+
+app.get('/zoom/:id', function(req, res) {
+    // If nothing went wrong the file is already in the uploads directory
+    console.log("req.params.id: ",req.params.id);
+    console.log('zoom works!');
+    // db{
+
+    db.zoom(req.params.id)//url, username, title, description
+        .then(result => {
+            res.json(result.rows);
+            console.log("zoom result: ",result.rows[0]);
+        })
+        .catch(function(err) {
+            console.log("err in GET /zoom :", err.message);
+        });
+});
+////////////////////////////////////////
+
+
+
 
 app.get("/image", (req, res) => {
     return db
@@ -62,6 +79,6 @@ app.get("/image", (req, res) => {
         .catch(function(err) {
             console.log("err in GET /images :", err.message);
         });
-});
 
+});
 app.listen(8080, () => console.log(`Glistening!`));
