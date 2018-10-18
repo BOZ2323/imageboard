@@ -45,3 +45,15 @@ exports.zoom = function(id) {
     const params = [id];
     return db.query(q, params);
 };
+
+exports.comments = function(image_id) {
+    const q = `
+    SELECT * FROM comments WHERE id = $1;
+        `;
+    [image_id]
+
+    ;
+
+    const params = [image_id];
+    return db.query(q, params);
+};

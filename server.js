@@ -46,7 +46,7 @@ app.post('/upload', uploader.single('file'), s3.upload, function(req, res) {
             console.log("this is the result: ",result);
         });
 });
-////////////////////////////
+//////////////////////////// zoom /////////
 
 app.get('/zoom/:id', function(req, res) {
     // If nothing went wrong the file is already in the uploads directory
@@ -63,9 +63,23 @@ app.get('/zoom/:id', function(req, res) {
             console.log("err in GET /zoom :", err.message);
         });
 });
-////////////////////////////////////////
+////////////////////// showcomments //////////////////
 
+app.get('/comments/:id', function(req, res) {
+    // If nothing went wrong the file is already in the uploads directory
+    console.log("req.params.id: ",req.params.id);
+    console.log('comments works!');
+    // db{
 
+    db.comments(req.params.id)
+        .then(result => {
+            res.json(result.rows);
+            console.log("comments result: ",result.rows[0]);
+        })
+        .catch(function(err) {
+            console.log("err in GET /comments :", err.message);
+        });
+});
 
 
 app.get("/image", (req, res) => {

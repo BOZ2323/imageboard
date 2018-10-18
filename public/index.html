@@ -29,7 +29,7 @@
                 <div v-for="image in images" class="none" v-if="images.length" :key="image.id">
                     <div class="image">
                         <img v-on:click="zoom(image.id)" class="mainimages" :src="image.url" :alt="image.title">
-                        <p v-on:click="zoom()" >{{image.title}}
+                        <p v-on:click="zoom()" >{{image.title}}</p>
                     </div>
                 </div>
             </div>
@@ -50,6 +50,20 @@
                                 <img :src="image.url" class="image_title" >
                                 {{image.title}}</img>
                             </p>
+
+                            <input name="comment" v-model="comment" placeholder="write a comment">
+                            <input name="username" v-model="username" placeholder="your name">
+                            <!-- <button @click="uploadcomments" class="button_home">Submit >></button> -->
+
+                    <h1>comments</h1>
+                            <h1><em>{{allcomments}}</em></h1>
+
+                            <button v-on:click="comments" class="button_home">show comments >></button>
+
+                            <!-- <p>
+                                <img :src="image.url" class="image_title" >
+                                {{image.title}}</img>
+                            </p> -->
 
                         </div>
 
@@ -84,19 +98,6 @@
             <!-- But sometimes we may want to bind the value to a dynamic property on the Vue instance.
             We can use v-bind to achieve that.
             In addition, using v-bind allows us to bind the input value to non-string values. -->
-<!-- ///////////////////////////////////////// -->
-
-                <!-- <div v-for="image in imageData" class="image">
-
-                    <p>
-                        <img :src="image.url" class="image_title" >
-                        {{image.title}}</img>
-                    </p>
-
-                </div>
-            </div>
-
-        </div> -->
 
 
 

@@ -5,7 +5,10 @@ Vue.component('image-modal', {
     template: '#zoomtmp',
     data: function(){ //provides data as a function, when you change sth here, it will change everywhere in the file
         return {
-            imageData: ''
+            imageData: '',
+            username: '',
+            comment: '',
+            allcomments: ''
         };
     },
     props: ['id'],
@@ -17,13 +20,21 @@ Vue.component('image-modal', {
         axios
             .get("/zoom/" + this.id)
             .then(function(response) {
-                console.log("RESPONSE :", response);
-                console.log("1 :", response.data);
+
                 self.imageData = response.data;
-                console.log("2 :", response.data);
+
+                console.log(" self.imageData:", self.imageData);
             })
             .catch(function(err) {
                 console.log("ERROR IN AXIOS :", err.message);
+            });
+        axios.get("/comments/" + this.id)
+            .then(function(response) {
+                self.comments = response.data;
+                console.log('self.comments', self.comments);
+            })
+            .catch(function(err) {
+                console.log("ERROR IN GET comments :", err.message);
             });
 
     },
@@ -36,20 +47,18 @@ Vue.component('image-modal', {
             this.$emit('change', 'I love my couch');//1st arg = name, 2.arg =
             //>> add to methods: handleChange;
         },
-        // zoom: function(id){ //to formData object append all the data you need
-        //     console.log("zoom works", id);
-        //     // var formData = new FormData;
-        //     // formData.append('file', this.file);//name of field you are adding and the file
-        //     // formData.append('desc', this.desc);
-        //     // formData.append('title', this.title);
-        //     // formData.append('username', this.username);
-        //     // axios.post('/zoom', formData );
-        //
-        //     // var me = this;
-        //     // axios.post('/zoom', formData).then(function (response) {
-        //     //     me.images.unshift(response.data[0]);
-        //     // });
-        // }
+        showcomments: function(){
+            console.log("uploading comments!");
+            var self = this;
+            axios
+                .get("/showcomments")
+                .then(function(response) {
+                    self.allcomments = response.data;
+                })
+                .catch(function(err) {
+                    console.log("ERROR IN AXIOS :", err.message);
+                });
+        },
     }
 });
 
@@ -63,11 +72,13 @@ new Vue({
         heading: "pixu",
         subHeading: "",
         images: [],
+        comments: [],
         title: '',
         desc: '',
         username:'',
         first:'',
         file: ''
+
     },
     mounted: function() {
         console.log("mounted");
@@ -75,14 +86,13 @@ new Vue({
         axios
             .get("/image")
             .then(function(response) {
-                console.log("RESPONSE :", response);
-                console.log("1 :", response.data);
                 self.images = response.data;
-                console.log("2 :", response.data);
             })
             .catch(function(err) {
-                console.log("ERROR IN AXIOS :", err.message);
+                console.log("ERROR IN GET images :", err.message);
             });
+
+
     },
     methods: {
         handleFileChange: function(e){
@@ -91,12 +101,6 @@ new Vue({
         zoom: function(id){
             console.log("here is the id: ",id);
             this.imageId = id;
-
-            // axios.get('/zoom', this.imageId).then(function (response) {
-            //     this.images.unshift(response.data[0]);
-            //     console.log(response.data);
-            // });
-
         },
         upload: function(){ //to formData object append all the data you need
             var formData = new FormData;
