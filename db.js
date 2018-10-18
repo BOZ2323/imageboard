@@ -33,6 +33,17 @@ exports.upload = function(url, username, title, description) {
     return db.query(q, params);
 };
 
+exports.upcomments = function({comment, username, image_id}) {
+    console.log("db query",comment, username, image_id);
+    const q = `
+    INSERT INTO comments (comment, username, image_id)
+    VALUES ($1, $2, $3) returning *
+        `;
+
+    const params = [comment || null, username || null, image_id || null];
+    return db.query(q, params);
+};
+
 
 exports.zoom = function(id) {
     const q = `

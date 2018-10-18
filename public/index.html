@@ -51,9 +51,9 @@
                                 {{image.title}}</img>
                             </p>
 
-                            <input name="comment" v-model="comment" placeholder="write a comment">
-                            <input name="username" v-model="username" placeholder="your name">
-                            <!-- <button @click="uploadcomments" class="button_home">Submit >></button> -->
+                            <input name="comment" v-model="uploadedComment.comment" placeholder="write a comment">
+                            <input name="username" v-model="uploadedComment.username" placeholder="your name">
+                            <button @click="upcomments(image.id)" class="button_home">Submit >></button>
                         </div>
                         <div>
                             <h1>comments</h1>

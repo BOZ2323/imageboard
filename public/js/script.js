@@ -8,7 +8,8 @@ Vue.component('image-modal', {
             imageData: '',
             username: '',
             comment: '',
-            comments: ''
+            comments: [],
+            uploadedComment: {}
         };
     },
     props: ['id'],
@@ -20,9 +21,7 @@ Vue.component('image-modal', {
         axios
             .get("/zoom/" + this.id)
             .then(function(response) {
-
                 self.imageData = response.data;
-
                 console.log(" self.imageData:", self.imageData);
             })
             .catch(function(err) {
@@ -40,25 +39,27 @@ Vue.component('image-modal', {
     },
     methods: {
         handleChange: function(){
-            console.log('hi');
+            
         },
         click: function(){
             this.heading  = this.id + '' + this.heading2;
-            this.$emit('change', 'I love my couch');//1st arg = name, 2.arg =
-            //>> add to methods: handleChange;
+            this.$emit('change', 'I love my couch');
         },
-        showcomments: function(){
-            console.log("uploading comments!");
+        upcomments: function(){
             var self = this;
-            axios
-                .get("/showcomments")
-                .then(function(response) {
-                    self.allcomments = response.data;
-                })
-                .catch(function(err) {
-                    console.log("ERROR IN AXIOS :", err.message);
+            self.uploadedComment.image_id = self.id;
+            console.log('self.uploadedComment ',self.uploadedComment);
+
+            axios.post('/upcomments/' + self.id, {
+                comment: self.uploadedComment
+            })
+                .then(function (response) { // second argument
+                    self.uploadedComment.unshift(response.data[0]);
+                    console.log('response.data[0]', response.data[0].comment);
+
+
                 });
-        },
+        }
     }
 });
 
@@ -110,9 +111,9 @@ new Vue({
             formData.append('username', this.username);
             axios.post('/upload', formData );
 
-            var me = this;
+            var self = this;
             axios.post('/upload', formData).then(function (response) {
-                me.images.unshift(response.data[0]);
+                self.images.unshift(response.data[0]);
 
             });
         }

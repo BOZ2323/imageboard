@@ -40,7 +40,7 @@ app.post('/upload', uploader.single('file'), s3.upload, function(req, res) {
     const imgUrl = s3url.s3Url + req.file.filename;
     console.log("********",imgUrl);
     console.log("s3url", s3url);
-    db.upload(imgUrl, req.body.username, req.body.title, req.body.desc)//url, username, title, description
+    db.upload(imgUrl, req.body.username, req.body.title, req.body.desc)
         .then(result => {
             res.json(result.rows);
             console.log("this is the result: ",result);
@@ -80,7 +80,20 @@ app.get('/comments/:id', function(req, res) {
             console.log("err in GET /comments :", err.message);
         });
 });
+///////////////////////////  upcomments /////////////
 
+app.post('/upcomments/:id', (req, res) => {
+    // If nothing went wrong the file is already in the uploads directory
+    console.log("upcomments req.body: ",req.body);
+    console.log("alle props von req.body ", req.body.comment, req.body.username,req.body.image_id);
+
+
+    db.upcomments(req.body.comment, req.body.username,req.body.image_id)
+        .then(result => {
+            res.json(result.rows);
+            console.log("this is the result: ",result);
+        });
+});
 
 app.get("/image", (req, res) => {
     return db
