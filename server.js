@@ -74,7 +74,7 @@ app.get('/comments/:id', function(req, res) {
     db.comments(req.params.id)
         .then(result => {
             res.json(result.rows);
-            console.log("comments result: ",result.rows[0]);
+            console.log("comments result: ",result.rows[0]); ////this works!
         })
         .catch(function(err) {
             console.log("err in GET /comments :", err.message);

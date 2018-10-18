@@ -8,7 +8,7 @@ Vue.component('image-modal', {
             imageData: '',
             username: '',
             comment: '',
-            allcomments: ''
+            comments: ''
         };
     },
     props: ['id'],

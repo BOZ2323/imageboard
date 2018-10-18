@@ -54,16 +54,19 @@
                             <input name="comment" v-model="comment" placeholder="write a comment">
                             <input name="username" v-model="username" placeholder="your name">
                             <!-- <button @click="uploadcomments" class="button_home">Submit >></button> -->
+                        </div>
+                        <div>
+                            <h1>comments</h1>
 
-                    <h1>comments</h1>
-                            <h1><em>{{allcomments}}</em></h1>
 
                             <button v-on:click="comments" class="button_home">show comments >></button>
+                            <div v-for="comment in comments" class="none" v-if="comments.length" >
+                                <!-- //:key="image.id" -->
+                                <div class="comment">
+                                    <h1><em>{{comment.comment}}</em></h1>
 
-                            <!-- <p>
-                                <img :src="image.url" class="image_title" >
-                                {{image.title}}</img>
-                            </p> -->
+                                </div>
+                            </div>
 
                         </div>
 
@@ -71,7 +74,7 @@
 
 
 
-                    </div>
+                </div>
         <!-- ///////////////////////////////////////// -->
 
                         <!-- <div v-for="comment in comments" class="comment">
