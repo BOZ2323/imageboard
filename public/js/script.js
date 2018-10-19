@@ -8,7 +8,7 @@ Vue.component('image-modal', {
             imageData: '',
             username: '',
             comment: '',
-            comments: [],
+            comments: '',
             uploadedComment: {}
         };
     },
@@ -39,7 +39,7 @@ Vue.component('image-modal', {
     },
     methods: {
         handleChange: function(){
-            
+
         },
         click: function(){
             this.heading  = this.id + '' + this.heading2;
@@ -50,9 +50,9 @@ Vue.component('image-modal', {
             self.uploadedComment.image_id = self.id;
             console.log('self.uploadedComment ',self.uploadedComment);
 
-            axios.post('/upcomments/' + self.id, {
-                comment: self.uploadedComment
-            })
+            axios.post('/upcomments/' + self.id,
+                self.uploadedComment
+            )
                 .then(function (response) { // second argument
                     self.uploadedComment.unshift(response.data[0]);
                     console.log('response.data[0]', response.data[0].comment);

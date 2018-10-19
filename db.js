@@ -33,7 +33,7 @@ exports.upload = function(url, username, title, description) {
     return db.query(q, params);
 };
 
-exports.upcomments = function({comment, username, image_id}) {
+exports.upcomments = function(comment, username, image_id) {
     console.log("db query",comment, username, image_id);
     const q = `
     INSERT INTO comments (comment, username, image_id)
