@@ -32,9 +32,20 @@ exports.upload = function(url, username, title, description) {
     const params = [url, username, title, description];
     return db.query(q, params);
 };
+exports.comments = function(image_id) {
+    const q = `
+    SELECT * FROM comments WHERE image_id = $1;
+        `;
+    [image_id]
+
+    ;
+
+    const params = [image_id];
+    return db.query(q, params);
+};
+
 
 exports.upcomments = function(comment, username, image_id) {
-    console.log("db query",comment, username, image_id);
     const q = `
     INSERT INTO comments (comment, username, image_id)
     VALUES ($1, $2, $3) returning *
@@ -43,6 +54,7 @@ exports.upcomments = function(comment, username, image_id) {
     const params = [comment || null, username || null, image_id || null];
     return db.query(q, params);
 };
+
 
 
 exports.zoom = function(id) {
@@ -54,17 +66,5 @@ exports.zoom = function(id) {
     ;
 
     const params = [id];
-    return db.query(q, params);
-};
-
-exports.comments = function(image_id) {
-    const q = `
-    SELECT * FROM comments WHERE id = $1;
-        `;
-    [image_id]
-
-    ;
-
-    const params = [image_id];
     return db.query(q, params);
 };

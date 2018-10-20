@@ -22,7 +22,6 @@ Vue.component('image-modal', {
             .get("/zoom/" + this.id)
             .then(function(response) {
                 self.imageData = response.data;
-                console.log(" self.imageData:", self.imageData);
             })
             .catch(function(err) {
                 console.log("ERROR IN AXIOS :", err.message);
@@ -30,7 +29,6 @@ Vue.component('image-modal', {
         axios.get("/comments/" + this.id)
             .then(function(response) {
                 self.comments = response.data;
-                console.log('self.comments', self.comments);
             })
             .catch(function(err) {
                 console.log("ERROR IN GET comments :", err.message);
@@ -54,7 +52,8 @@ Vue.component('image-modal', {
                 self.uploadedComment
             )
                 .then(function (response) { // second argument
-                    self.uploadedComment.unshift(response.data[0]);
+                    self.comments.unshift(response.data[0]);
+                    console.log("self.comments: ",self.comments)
                     console.log('response.data[0]', response.data[0].comment);
 
 

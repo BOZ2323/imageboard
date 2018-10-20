@@ -22,7 +22,7 @@ var uploader = multer({ //you call multer and pass it an obj with the obj just c
         fileSize: 2097152
     }
 });
-//user selects the image in we upload it and we console.log in our route
+
 
 ///////////////////////////
 const express = require("express");
@@ -43,34 +43,21 @@ app.post('/upload', uploader.single('file'), s3.upload, function(req, res) {
     db.upload(imgUrl, req.body.username, req.body.title, req.body.desc)
         .then(result => {
             res.json(result.rows);
-            console.log("this is the result: ",result);
         });
 });
 //////////////////////////// zoom /////////
 
 app.get('/zoom/:id', function(req, res) {
-    // If nothing went wrong the file is already in the uploads directory
-    console.log("req.params.id: ",req.params.id);
-    console.log('zoom works!');
-    // db{
-
     db.zoom(req.params.id)//url, username, title, description
         .then(result => {
             res.json(result.rows);
-            console.log("zoom result: ",result.rows[0]);
         })
         .catch(function(err) {
-            console.log("err in GET /zoom :", err.message);
         });
 });
 ////////////////////// showcomments //////////////////
 
 app.get('/comments/:id', function(req, res) {
-    // If nothing went wrong the file is already in the uploads directory
-    console.log("req.params.id: ",req.params.id);
-    console.log('comments works!');
-    // db{
-
     db.comments(req.params.id)
         .then(result => {
             res.json(result.rows);
@@ -83,15 +70,10 @@ app.get('/comments/:id', function(req, res) {
 ///////////////////////////  upcomments /////////////
 
 app.post('/upcomments/:id', (req, res) => {
-    // If nothing went wrong the file is already in the uploads directory
-    console.log("upcomments req.body: ",req.body);
-    console.log("alle props von req.body ", req.body.comment, req.body.username,req.body.image_id);
-
-
     db.upcomments(req.body.comment, req.body.username,req.body.image_id)
         .then(result => {
             res.json(result.rows);
-            console.log("this is the result: ",result);
+            console.log("upcomments/:id, result.rows", result.rows);
         });
 });
 
@@ -99,8 +81,6 @@ app.get("/image", (req, res) => {
     return db
         .getImages()
         .then(result => {
-            console.log("getImages result :", result);
-            console.log(result.rows);
             res.json(result);
         })
         .catch(function(err) {
