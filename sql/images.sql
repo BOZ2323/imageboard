@@ -20,7 +20,7 @@ CREATE TABLE comments(
 
 
 INSERT INTO comments (comment, username, image_id) VALUES ('astonishing, cool, awesome, wonderful, lovable picture', 'Peter Schott', 1);
-INSERT INTO comments (comment, username, image_id) VALUES ('weird, abnoxious, shockingly unprofessional, irritating, despisable picture', 'Jürgen Wistuba', 2);
+INSERT INTO comments (comment, username, image_id) VALUES ('weird, abnoxious, shockingly unprofessional, irritating, despisable picture', 'Jürgen Wistuba', 1);
 -- ///////////////////////
 
 

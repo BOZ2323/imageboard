@@ -3,6 +3,7 @@
     background-color: #746d6d;
     /* background-color: #f18936; */
 }
+
 #main {
     align-items: center;
     /* padding: 10px;
@@ -12,6 +13,14 @@
     align-items: center;
     flex-direction: column; */
 }
+
+
+.view {
+    grid-column: 1/ span 20;
+    grid-row: 1/ span 20;
+}
+
+
 #heading{
     font-family: Arial;
     font-size: 70px;
@@ -122,22 +131,7 @@ img {
     font-size: 14px;
     color: white;
 }
-/* .image img {
-    width: 200px;
-    height: 200px;
-    padding: 20px;
-    object-fit: cover; */
-    /* object-position: center; */
-    /* align-items: flex-start;
-    /* flex-wrap: wrap;
-    justify-content: flex-start; */
 
-
-/* .image p{
-    font-size: 20px;
-    color: white;
-    text-align: center;
-}*/
 
 h1{
     font-size: 60px;
