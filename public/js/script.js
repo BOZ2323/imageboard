@@ -69,7 +69,7 @@ new Vue({
 
     data: {
         imageId: null,
-        heading: "pixu",
+        heading: "pixup",
         subHeading: "",
         images: [],
         comments: [],
